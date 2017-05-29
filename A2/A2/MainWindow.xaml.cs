@@ -1,4 +1,14 @@
-﻿using System;
+﻿// ==============================================
+// Jordan Lee (30002218)
+// CPSC 481 - Spring 2017
+//
+// A2 - Stopwatch and Timer
+// A stopwatch and timer that mimics how the 
+// Android's stopwatch and timer functionality 
+// works.
+// ==============================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,16 +34,107 @@ namespace A2
 		private Timer timerTimer;
 		private int timerTime;
 
+		private bool stopwatchActive = false;
+		private Timer stopwatchTimer;
+		private int stopwatchTime;
+
 		public MainWindow()
 		{
 			InitializeComponent();
 			
+			stopwatchTimer = new Timer(1000);	// Timer ticks once every second
+			stopwatchTimer.Elapsed += incrementStopwatch;
+			stopwatchTimer.Enabled = false;		// Timer disabled initially
+
 			timerTimer = new Timer(1000);		// Timer ticks once every second
 			timerTimer.Elapsed += decrementTimer;
+			timerTimer.Enabled = false;			// Timer disabled initially
+		}
+
+		// Starts/stops the stopwatch
+		private void stopwatch_click(object sender, RoutedEventArgs e)
+		{
+			// Stop startwatch
+			if(stopwatchActive)
+			{
+				stopwatchActive = false;		// Change stopwatch state
+				// Changes button to Start
+				buttonStopwatch.BorderBrush = Brushes.Green;
+				buttonStopwatch.Content = "Start";
+
+				buttonLap.Content = "Reset";	// Change lap button function
+				stopwatchTimer.Enabled = false;	// Stop stopwatch
+			}
+			// Start stopwatch
+			else
+			{
+				stopwatchActive = true;			// Change stopwatch state
+				// Changes button to Stop
+				buttonStopwatch.BorderBrush = Brushes.Red;
+				buttonStopwatch.Content = "Stop";
+
+				buttonLap.Content = "Lap";		// Change reset button function
+				buttonLap.IsEnabled = true;		// Enable button if not already enabled
+				stopwatchTimer.Enabled = true;	// Start stopwatch
+			}
+		}
+		
+		// Lap button, or reset (based on stopwatch state)
+		private void lap_click(object sender, RoutedEventArgs e)
+		{
+			// Lap
+			if(stopwatchActive)
+				listBox.Items.Add(stopwatchHour.Content + ":"
+					+ stopwatchMin.Content + ":"
+					+ stopwatchSec.Content);	// Adds current time to the listbox
+			// Reset
+			else
+			{
+				stopwatchTime = 0;				// Reset stopwatch time
+				updateStopwatch();				// Reset stopwatch display
+
+				buttonLap.Content = "Lap";		// Reset button
+				buttonLap.IsEnabled = false;	// Disable lap button (can't lap on 00:00:00)
+				listBox.Items.Clear();			// Clear recorded time
+			}
+		}
+
+		// "Tick" of stopwatch
+		private void incrementStopwatch(object Sender, ElapsedEventArgs e)
+		{
+			Dispatcher.Invoke(new Action(() =>
+			{
+				stopwatchTime++;			// Increment time by 1 second
+				updateStopwatch();			// Update stopwatch display
+			}));
+		}
+
+		// Updates stopwatch display with the current stopwatch time
+		private void updateStopwatch ()
+		{
+			// Convert stopwatch time from seconds into hours, minutes, and seconds
+			int[] time = formatSeconds(stopwatchTime);
+			int stopwatchTimeHour = time[0];
+			int stopwatchTimeMin = time[1];
+			int stopwatchTimeSec = time[2];
+
+			// Formats time (adds zero if single digit)
+			if(stopwatchTimeHour < 10)
+				stopwatchHour.Content = "0" + stopwatchTimeHour;
+			else
+				stopwatchHour.Content = stopwatchTimeHour;
+			if(stopwatchTimeMin < 10)
+				stopwatchMin.Content = "0" + stopwatchTimeMin;
+			else
+				stopwatchMin.Content = stopwatchTimeMin;
+			if(stopwatchTimeSec < 10)
+				stopwatchSec.Content = "0" + stopwatchTimeSec;
+			else
+				stopwatchSec.Content = stopwatchTimeSec;
 		}
 
 		// Starts timer with input time
-		private void button_Click(object sender, RoutedEventArgs e)
+		private void timerStart (object sender, RoutedEventArgs e)
 		{
 			timerTimer.Enabled = false;			// Disable ticking (if resetting a running timer)
 

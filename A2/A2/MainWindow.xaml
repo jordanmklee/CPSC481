@@ -5,13 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:A2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="526.388">
 	<Grid>
 		<TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="519" Margin="0,0,-0.333,-0.333">
 			<TabItem Header="Stopwatch">
 				<Grid Background="#FFE5E5E5">
-					<ListBox x:Name="listBox" HorizontalAlignment="Left" Height="100" Margin="96,183,0,0" VerticalAlignment="Top" Width="300"/>
-					<Label x:Name="label_Copy" Content="00:00:00" HorizontalAlignment="Center" Margin="154,10,152.667,0" VerticalAlignment="Top" FontSize="48" Width="206"/>
+					<Label x:Name="stopwatchHour" Content="00" HorizontalAlignment="Center" Margin="143,10,297.667,0" VerticalAlignment="Top" FontSize="48" Width="72"/>
+					<Label x:Name="stopwatchColon1" Content=":" HorizontalAlignment="Center" Margin="200,10,232.667,0" VerticalAlignment="Top" FontSize="48" Width="80"/>
+					<Label x:Name="stopwatchMin" Content="00" HorizontalAlignment="Center" Margin="215,10,227.667,0" VerticalAlignment="Top" FontSize="48" Width="70"/>
+					<Label x:Name="stopwatchColon2" Content=":" HorizontalAlignment="Center" Margin="274,10,158.667,0" VerticalAlignment="Top" FontSize="48" Width="80"/>
+					<Label x:Name="stopwatchSec" Content="00" HorizontalAlignment="Center" Margin="285,10,147.667,0" VerticalAlignment="Top" FontSize="48" Width="80"/>
+					<ListBox x:Name="listBox" HorizontalAlignment="Left" Height="100" Margin="143,154,0,0" VerticalAlignment="Top" Width="222"/>
+					<Button x:Name="buttonStopwatch" Content="Start" HorizontalAlignment="Left" Margin="290,108,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FF36FF00" Click="stopwatch_click"/>
+					<Button x:Name="buttonLap" Content="Lap" HorizontalAlignment="Left" Margin="140,108,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="lap_click"/>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Timer">
@@ -27,7 +33,7 @@
 					<TextBox x:Name="textBoxHour" HorizontalAlignment="Left" Height="23" Margin="118,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65" Text="0"/>
 					<TextBox x:Name="textBoxMin" HorizontalAlignment="Left" Height="23" Margin="235,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65" Text="0"/>
 					<TextBox x:Name="textBoxSec" HorizontalAlignment="Left" Height="23" Margin="354,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65" Text="0"/>
-					<Button x:Name="timerButton" Content="Start" HorizontalAlignment="Left" Margin="225,185,0,0" VerticalAlignment="Top" Width="65" Click="button_Click" BorderBrush="#FF1FFF00"/>
+					<Button x:Name="timerButton" Content="Start" HorizontalAlignment="Left" Margin="225,185,0,0" VerticalAlignment="Top" Width="65" Click="timerStart" BorderBrush="#FF1FFF00"/>
 					
 				</Grid>
 			</TabItem>
