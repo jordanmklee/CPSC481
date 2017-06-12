@@ -46,6 +46,7 @@ namespace A3
 				img.Width = 100;
 				img.Height = 100;
 				img.Stretch = Stretch.Fill;
+
 				// Offset by 50 so mouse is in middle of image
 				img.SetValue(Canvas.LeftProperty, e.GetPosition(canvas).X - 50);
 				img.SetValue(Canvas.TopProperty, e.GetPosition(canvas).Y - 50);

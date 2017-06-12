@@ -8,6 +8,6 @@
         Title="CPSC 481 - A3" Height="350" Width="525" SizeChanged="Window_SizeChanged">
 	<Grid>
 		<Button x:Name="button" Content="Sort" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-		<Canvas Name="canvas" AllowDrop="True" DragDrop.Drop="Canvas_Drop" Background="#FFA6A4A4" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" MouseDown="canvas_MouseDown" MouseUp="canvas_MouseUp" MouseMove="canvas_MouseMove" Width="500" Height="276"/>
+		<Canvas Name="canvas" AllowDrop="True" DragDrop.Drop="Canvas_Drop" Background="White" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" MouseDown="canvas_MouseDown" MouseUp="canvas_MouseUp" MouseMove="canvas_MouseMove" Width="500" Height="276"/>
 	</Grid>
 </Window>
